@@ -172,6 +172,7 @@ function ding_permissions_secure_permissions($role) {
     ),
     'administrators' => array(
       'access administration pages',
+      'access advuser',
       'access all views',
       'access all webform results',
       'access campaign rules',
@@ -195,6 +196,7 @@ function ding_permissions_secure_permissions($role) {
       'add media from remote sources',
       'administer actions',
       'administer advanced pane settings',
+      'administer advuser',
       'administer autologout',
       'administer block access settings',
       'administer blocks',
