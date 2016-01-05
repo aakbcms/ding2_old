@@ -140,8 +140,9 @@ function ding_permissions_secure_permissions_roles() {
  */
 function ding_permissions_secure_permissions($role) {
   $permissions = array(
-    // Permissions to disable that aren't assigned to any roles.
-      0 => array(
+    // Permissions to disable even when no roles are assigned to them.
+    // You can use this to disable modification of permissions which is set to false for all roles.
+    0 => array(
     ),
     'anonymous user' => array(
       'access comments',
@@ -607,6 +608,13 @@ function ding_permissions_secure_permissions($role) {
       'manipulate all queues',
       'manipulate queues',
       'notify of path changes',
+      'override ding_event promote to front page option',
+      'override ding_event published option',
+      'override ding_group published option',
+      'override ding_news promote to front page option',
+      'override ding_news published option',
+      'override ding_page published option',
+      'override ding_rolltab published option',
       'participate in workflow',
       'revert revisions',
       'schedule (un)publishing of nodes',
