@@ -96,7 +96,50 @@ function ding_library_strongarm() {
           'weight' => '7',
         ),
       ),
-      'display' => array(),
+      'display' => array(
+        'opening_hours_week' => array(
+          'teaser' => array(
+            'weight' => '2',
+            'visible' => TRUE,
+          ),
+          'default' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
+          'search_result' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
+        ),
+        'opening_hours_week_5130' => array(
+          'default' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
+          'teaser' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
+          'search_result' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
+        ),
+        'opening_hours_week_5131' => array(
+          'default' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
+          'teaser' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
+          'search_result' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
+        ),
+      ),
     ),
   );
   $export['field_bundle_settings_node__ding_library'] = $strongarm;
