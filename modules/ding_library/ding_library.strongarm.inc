@@ -106,38 +106,6 @@ function ding_library_strongarm() {
             'weight' => '0',
             'visible' => FALSE,
           ),
-          'search_result' => array(
-            'weight' => '0',
-            'visible' => FALSE,
-          ),
-        ),
-        'opening_hours_week_5130' => array(
-          'default' => array(
-            'weight' => '0',
-            'visible' => FALSE,
-          ),
-          'teaser' => array(
-            'weight' => '0',
-            'visible' => FALSE,
-          ),
-          'search_result' => array(
-            'weight' => '0',
-            'visible' => FALSE,
-          ),
-        ),
-        'opening_hours_week_5131' => array(
-          'default' => array(
-            'weight' => '0',
-            'visible' => FALSE,
-          ),
-          'teaser' => array(
-            'weight' => '0',
-            'visible' => FALSE,
-          ),
-          'search_result' => array(
-            'weight' => '0',
-            'visible' => FALSE,
-          ),
         ),
       ),
     ),
