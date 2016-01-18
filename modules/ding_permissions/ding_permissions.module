@@ -140,8 +140,9 @@ function ding_permissions_secure_permissions_roles() {
  */
 function ding_permissions_secure_permissions($role) {
   $permissions = array(
-    // Permissions to disable that aren't assigned to any roles.
-      0 => array(
+    // Permissions to disable even when no roles are assigned to them.
+    // You can use this to disable modification of permissions which is set to false for all roles.
+    0 => array(
     ),
     'anonymous user' => array(
       'access comments',
@@ -193,6 +194,7 @@ function ding_permissions_secure_permissions($role) {
       'access user profiles',
       'access workbench',
       'add media from remote sources',
+      'administer aakb survey',
       'administer actions',
       'administer advanced pane settings',
       'administer autologout',
@@ -417,6 +419,7 @@ function ding_permissions_secure_permissions($role) {
       'export nodes',
       'export own nodes',
       'enable all blocks',
+      'export aakb survey',
       'export relation types',
       'export secure permissions',
       'generate features',
@@ -797,6 +800,7 @@ function ding_permissions_secure_permissions($role) {
       'edit terms in 7',
       'edit webform components',
       'edit workflow comment',
+      'export aakb survey',
       'manipulate all queues',
       'manipulate queues',
       'notify of path changes',
