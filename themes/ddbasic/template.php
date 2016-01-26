@@ -283,6 +283,9 @@ function ddbasic_node_view_alter(&$build) {
       $build[$field][0]['#prefix'] = '<a class="opening-hours-toggle js-opening-hours-toggle js-collapsed" href="#toggle-opening-hours">'.$build[$field]['#title'].'</a><div class="libraries-opening-hours js-opening-hours-toggle-element">';
       $build[$field][0]['#suffix'] = '</div>';
 
+      // Hide label.
+      $build[$field]['#label_display'] = 'hidden';
+
       if (!isset($build['opening_hours'])) {
         $build['opening_hours'] = array();
       }
@@ -447,13 +450,6 @@ function ddbasic_preprocess_node(&$variables, $hook) {
         $langcode = NULL
       ))
     );
-  }
-
-  // Remove labels from openings hours.
-  if (isset($variables['content']['opening_hours'])) {
-    foreach ($variables['content']['opening_hours'] as $key => $hours) {
-      $variables['content']['opening_hours'][$key]['#label_display'] = 'hidden';
-    }
   }
 }
 
