@@ -100,9 +100,11 @@ if ($view_mode == 'teaser') {
       <?php print render($content); ?>
     </div>
     <?php if (isset($content['opening_hours'])) : ?>
-      <?php foreach ($content['opening_hours'] as $opening_hours) : ?>
-        <?php print render($opening_hours);  ?>
-      <?php endforeach; ?>
+      <div class="opening-hours-wrapper">
+        <?php foreach ($content['opening_hours'] as $opening_hours) : ?>
+          <?php print render($opening_hours);  ?>
+        <?php endforeach; ?>
+      </div>
     <?php endif; ?>
   </div>
 </div>
