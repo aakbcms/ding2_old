@@ -100,11 +100,23 @@ function ding_library_strongarm() {
         'opening_hours_week' => array(
           'teaser' => array(
             'weight' => '2',
-            'visible' => TRUE,
+            'visible' => FALSE,
           ),
           'default' => array(
             'weight' => '0',
             'visible' => FALSE,
+          ),
+        ),
+        'opening_hours_week_5131' => array(
+          'teaser' => array(
+            'weight' => '0',
+            'visible' => TRUE,
+          ),
+        ),
+        'opening_hours_week_5130' => array(
+          'teaser' => array(
+            'weight' => '0',
+            'visible' => TRUE,
           ),
         ),
       ),
