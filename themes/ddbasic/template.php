@@ -448,6 +448,13 @@ function ddbasic_preprocess_node(&$variables, $hook) {
       ))
     );
   }
+
+  // Remove labels from openings hours.
+  if (isset($variables['content']['opening_hours'])) {
+    foreach ($variables['content']['opening_hours'] as $key => $hours) {
+      $variables['content']['opening_hours'][$key]['#label_display'] = 'hidden';
+    }
+  }
 }
 
 /**

@@ -6,9 +6,6 @@
   function toggle_opening_hours() {
     // Set variables
     var element = $('.js-opening-hours-toggle');
-    var siteHeader = $('.site-header');
-    var scrollOffset = 0;
-    var scrollToTarget;
 
     // Attach click
     element.on('click touchstart', function(event) {
@@ -19,26 +16,6 @@
       $(this).next('.js-opening-hours-toggle-element').slideToggle('fast', function() {
         // Toggle class
         $(element).toggleClass('js-collapsed js-expanded');
-
-        // Set scroll offset
-        if ($('.site-header.js-fixed').length) {
-          // If the site header is fixed use the height
-          scrollOffset = $(siteHeader).height();
-        }
-
-        // Scroll to the top of the element
-        if ($(element).parents('.js-library-opening-hours-target').length) {
-          // If there is a wrapper element with the target class
-          scrollToTarget = $(element).parents('.js-library-opening-hours-target');
-        } else {
-          // Else let's scroll to the element clicked
-          scrollToTarget = $(element);
-        }
-
-        $.scrollTo(scrollToTarget, 500, {
-          offset: -scrollOffset,
-          axis: 'y'
-        });
 
         // Remove focus from link
         $(element).blur();
