@@ -140,8 +140,7 @@ function ding_permissions_secure_permissions_roles() {
  */
 function ding_permissions_secure_permissions($role) {
   $permissions = array(
-    // Permissions to disable even when no roles are assigned to them.
-    // You can use this to disable modification of permissions which is set to false for all roles.
+    // Permissions to disable that aren't assigned to any roles.
     0 => array(
     ),
     'anonymous user' => array(
