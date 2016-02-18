@@ -442,6 +442,29 @@ function ding_user_frontend_default_page_manager_handlers() {
     $pane->uuid = '96284cb3-0776-42ec-808d-fbd0707cd346';
     $display->content['new-96284cb3-0776-42ec-808d-fbd0707cd346'] = $pane;
     $display->panels['main_content'][1] = 'new-96284cb3-0776-42ec-808d-fbd0707cd346';
+    $pane = new stdClass();
+    $pane->pid = 'new-28191d06-af21-4843-aedf-561b6cabde17';
+    $pane->panel = 'main_content';
+    $pane->type = 'provider';
+    $pane->subtype = 'provider';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $pane->uuid = '28191d06-af21-4843-aedf-561b6cabde17';
+    $display->content['new-28191d06-af21-4843-aedf-561b6cabde17'] = $pane;
+    $display->panels['main_content'][2] = 'new-28191d06-af21-4843-aedf-561b6cabde17';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
