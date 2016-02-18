@@ -825,29 +825,16 @@ search/node',
     $display->content['new-37d18c98-64ec-448f-ac62-ad0cc199fe06'] = $pane;
     $display->panels['header'][3] = 'new-37d18c98-64ec-448f-ac62-ad0cc199fe06';
     $pane = new stdClass();
-    $pane->pid = 'new-878eb4d9-6377-4af3-ace5-bf3dd3988dad';
+    $pane->pid = 'new-5b327b9d-7c25-4dce-82c6-77973756372c';
     $pane->panel = 'header';
-    $pane->type = 'block';
-    $pane->subtype = 'ding_gatewayf-login';
+    $pane->type = 'wayf_dk_login';
+    $pane->subtype = 'wayf_dk_login';
     $pane->shown = TRUE;
-    $pane->access = array(
-      'plugins' => array(
-        0 => array(
-          'name' => 'role',
-          'settings' => array(
-            'rids' => array(
-              0 => 1,
-            ),
-          ),
-          'context' => 'logged-in-user',
-          'not' => FALSE,
-        ),
-      ),
-    );
+    $pane->access = array();
     $pane->configuration = array(
+      'icon' => 'UK_01.png',
       'override_title' => 0,
       'override_title_text' => '',
-      'override_title_heading' => 'h2',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -857,33 +844,20 @@ search/node',
     $pane->extras = array();
     $pane->position = 4;
     $pane->locks = array();
-    $pane->uuid = '878eb4d9-6377-4af3-ace5-bf3dd3988dad';
-    $display->content['new-878eb4d9-6377-4af3-ace5-bf3dd3988dad'] = $pane;
-    $display->panels['header'][4] = 'new-878eb4d9-6377-4af3-ace5-bf3dd3988dad';
+    $pane->uuid = '5b327b9d-7c25-4dce-82c6-77973756372c';
+    $display->content['new-5b327b9d-7c25-4dce-82c6-77973756372c'] = $pane;
+    $display->panels['header'][4] = 'new-5b327b9d-7c25-4dce-82c6-77973756372c';
     $pane = new stdClass();
-    $pane->pid = 'new-5b25369c-89e4-4f49-857d-6b4b5b0d456a';
+    $pane->pid = 'new-345196d7-d82d-42fd-aa3d-510bb2054784';
     $pane->panel = 'header';
-    $pane->type = 'block';
-    $pane->subtype = 'ding_gatewayf_registration-registration';
+    $pane->type = 'ding_wayf_dk_create_user';
+    $pane->subtype = 'ding_wayf_dk_create_user';
     $pane->shown = TRUE;
-    $pane->access = array(
-      'plugins' => array(
-        0 => array(
-          'name' => 'role',
-          'settings' => array(
-            'rids' => array(
-              0 => 1,
-            ),
-          ),
-          'context' => 'logged-in-user',
-          'not' => FALSE,
-        ),
-      ),
-    );
+    $pane->access = array();
     $pane->configuration = array(
+      'icon' => NULL,
       'override_title' => 0,
       'override_title_text' => '',
-      'override_title_heading' => 'h2',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -893,9 +867,9 @@ search/node',
     $pane->extras = array();
     $pane->position = 5;
     $pane->locks = array();
-    $pane->uuid = '5b25369c-89e4-4f49-857d-6b4b5b0d456a';
-    $display->content['new-5b25369c-89e4-4f49-857d-6b4b5b0d456a'] = $pane;
-    $display->panels['header'][5] = 'new-5b25369c-89e4-4f49-857d-6b4b5b0d456a';
+    $pane->uuid = '345196d7-d82d-42fd-aa3d-510bb2054784';
+    $display->content['new-345196d7-d82d-42fd-aa3d-510bb2054784'] = $pane;
+    $display->panels['header'][5] = 'new-345196d7-d82d-42fd-aa3d-510bb2054784';
     $pane = new stdClass();
     $pane->pid = 'new-94a239e5-00e0-4807-917f-df52c53405e7';
     $pane->panel = 'navigation';
