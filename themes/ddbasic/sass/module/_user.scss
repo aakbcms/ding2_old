@@ -509,6 +509,7 @@
   display: inline-block;
 
   .ding-wayf--create-user {
+
     background-color: #FFF;
 
     @include border-radius($button-border-radius);
@@ -521,6 +522,9 @@
   }
 }
 
+.ding-gatewayf--link-wrapper {
+  margin-top: $medium-spacing;
+}
 
 /* User profile
    ========================================================================== */
