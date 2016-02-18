@@ -314,7 +314,7 @@ class AlmaClient {
     foreach ($info->getElementsByTagName('patronBlock') as $block) {
       $data['blocks'][] = array(
         'code' => $block->getAttribute('code'),
-        'is_system' => (bool) ($block->getElementsByTagName('isSystemBlock') == 'yes'),
+        'is_system' => (bool) ($block->getAttribute('isSystemBlock') == 'yes'),
       );
     }
 
