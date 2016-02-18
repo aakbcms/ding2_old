@@ -30,7 +30,7 @@
   }
 
   /* Opening hours toggle */
-  .opening-hours-toggle {
+  .opening-hours-wrapper {
     @include zen-grid-item(4, 1, right);
 
     padding-bottom: $medium-spacing;
@@ -39,30 +39,20 @@
 
   /* Media queries */
   @include small-medium() {
-    .opening-hours-toggle {
+    .opening-hours-wrapper {
       @include zen-grid-item(9, 4);
       @include zen-clear();
 
       padding-bottom: 0;
       text-align: left;
-      width: auto;
+      width: 100%;
+      margin-left: 0;
     }
   }
 }
 
 .libraries-opening-hours {
-  @include zen-grid-item(4, 1, right);
-  @include zen-clear(right);
-
   display: none;
-
-  /* Media queries */
-  @include small-medium() {
-    @include zen-grid-item(12, 1);
-    @include zen-clear(both);
-
-    margin-top: 20px;
-  }
 }
 
 .libraries {
