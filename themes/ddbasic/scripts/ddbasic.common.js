@@ -27,13 +27,17 @@
   }
 
   /**
-   * HACK: this is an hack that have to be fixed later.
+   * HACK: this function is used to include the gatewayf login link into the
+   *       header, so it's visible when the login tab is used. To do this any
+   *       other way would require at whole re-write of the themes header and
+   *       how it works.
    */
   function placement_of_wayf() {
     var wrapper = $('<section class="wayf-wrapper"></section>');
     $('.pane-ding-wayf-dk-create-user').appendTo(wrapper);
     $('.pane-wayf-dk-login').appendTo(wrapper);
-
+    $('.pane-ding-gatewayf-registration-registration').appendTo(wrapper);
+    $('.pane-ding-gatewayf-login').appendTo(wrapper);
     wrapper.appendTo($('.header-inner'));
   }
 
