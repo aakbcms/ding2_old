@@ -217,6 +217,8 @@ function ding_library_default_page_manager_handlers() {
       'context' => 'argument_entity_id:node_1',
       'override_title' => 0,
       'override_title_text' => '',
+      'tid' => '5131',
+      'override_title_heading' => 'h2',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -232,6 +234,35 @@ function ding_library_default_page_manager_handlers() {
     $pane->uuid = '21110f84-c932-4a89-8505-63d45b61c778';
     $display->content['new-21110f84-c932-4a89-8505-63d45b61c778'] = $pane;
     $display->panels['main_content'][3] = 'new-21110f84-c932-4a89-8505-63d45b61c778';
+    $pane = new stdClass();
+    $pane->pid = 'new-9a0645ec-09bb-4446-b5f0-88cbeef4cbed';
+    $pane->panel = 'main_content';
+    $pane->type = 'week';
+    $pane->subtype = 'week';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'hide_if_empty' => 0,
+      'tid' => '5130',
+      'context' => 'argument_entity_id:node_1',
+      'override_title' => 0,
+      'override_title_text' => '',
+      'override_title_heading' => 'h2',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'ding-library-opening-hours js-opening-hours-toggle-element',
+    );
+    $pane->extras = array();
+    $pane->position = 4;
+    $pane->locks = array();
+    $pane->uuid = '9a0645ec-09bb-4446-b5f0-88cbeef4cbed';
+    $display->content['new-9a0645ec-09bb-4446-b5f0-88cbeef4cbed'] = $pane;
+    $display->panels['main_content'][4] = 'new-9a0645ec-09bb-4446-b5f0-88cbeef4cbed';
     $pane = new stdClass();
     $pane->pid = 'new-e75bb4dd-8e1f-4738-b12c-d02f04cd587b';
     $pane->panel = 'main_content';
@@ -255,11 +286,11 @@ function ding_library_default_page_manager_handlers() {
       'css_class' => 'ding-library-news',
     );
     $pane->extras = array();
-    $pane->position = 4;
+    $pane->position = 5;
     $pane->locks = array();
     $pane->uuid = 'e75bb4dd-8e1f-4738-b12c-d02f04cd587b';
     $display->content['new-e75bb4dd-8e1f-4738-b12c-d02f04cd587b'] = $pane;
-    $display->panels['main_content'][4] = 'new-e75bb4dd-8e1f-4738-b12c-d02f04cd587b';
+    $display->panels['main_content'][5] = 'new-e75bb4dd-8e1f-4738-b12c-d02f04cd587b';
     $pane = new stdClass();
     $pane->pid = 'new-0d5ac3d3-3666-431f-8672-226f8d6b8694';
     $pane->panel = 'main_content';
@@ -286,11 +317,11 @@ function ding_library_default_page_manager_handlers() {
       'css_class' => 'ding-library-events',
     );
     $pane->extras = array();
-    $pane->position = 5;
+    $pane->position = 6;
     $pane->locks = array();
     $pane->uuid = '0d5ac3d3-3666-431f-8672-226f8d6b8694';
     $display->content['new-0d5ac3d3-3666-431f-8672-226f8d6b8694'] = $pane;
-    $display->panels['main_content'][5] = 'new-0d5ac3d3-3666-431f-8672-226f8d6b8694';
+    $display->panels['main_content'][6] = 'new-0d5ac3d3-3666-431f-8672-226f8d6b8694';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
