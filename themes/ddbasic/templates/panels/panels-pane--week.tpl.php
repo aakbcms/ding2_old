@@ -19,7 +19,7 @@
  * Changed: Add t() function to pane title.
  */
 ?>
-<a class="opening-hours-toggle js-opening-hours-toggle js-collapsed" href="#toggle-opening-hours"><?php print t('Openings hours') ?></a>
+<?php print render($link) ?>
 <div class="<?php print $classes; ?>" <?php print $id; ?>>
   <?php if ($admin_links): ?>
     <?php print $admin_links; ?>
