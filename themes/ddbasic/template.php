@@ -150,6 +150,13 @@ function ddbasic_preprocess_panels_pane(&$vars) {
     }
   }
 
+  // Opening hours link title.
+  if (isset($vars['content']['#theme']) && $vars['content']['#theme'] == 'opening_hours_week') {
+    $term = taxonomy_term_load($vars['content']['#tid']);
+    $title = t('Opening hours ' . $term->name);
+    $vars['link'] = '<a class="opening-hours-toggle js-opening-hours-toggle js-collapsed" href="#toggle-opening-hours">' . $title . '</a>';
+  }
+
   // Suggestions on panel pane.
   $vars['theme_hook_suggestions'][] = 'panels_pane__' . $vars['pane']->panel;
 
