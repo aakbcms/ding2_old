@@ -478,20 +478,20 @@
   bottom: 15px;
 }
 
-.ding-wayf--cancel {
+.ding-gatewayf--cancel {
   margin-left: 15px;
 }
 
-.pane-wayf-dk-login {
+.pane-ding-gatewayf-login {
   display: inline-block;
 
-  .ding-wayf--login-block {
+  .ding-gatewayf--login-block {
     background-color: #fff;
 
     @include border-radius($button-border-radius);
 
     a {
-      color: #000;
+      color: $topbar-background-color;
     }
 
     padding: 4px 15px;
@@ -505,16 +505,15 @@
   }
 }
 
-.pane-ding-wayf-dk-create-user {
+.pane-ding-gatewayf-registration-registration {
   display: inline-block;
 
-  .ding-wayf--create-user {
-
+  .ding-gatewayf--registration {
     background-color: #FFF;
 
     @include border-radius($button-border-radius);
 
-    a {
+    .ding-gatewayf-link {
       color: $topbar-background-color;
     }
 
