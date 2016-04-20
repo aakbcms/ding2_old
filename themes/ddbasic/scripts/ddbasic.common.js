@@ -4,8 +4,18 @@
    * Toggle opening hours
    */
   function toggle_opening_hours() {
+    // Create toggle link
+    $('<a />', {
+      'class' : 'opening-hours-toggle js-opening-hours-toggle js-collapsed',
+      'href' : Drupal.t('#toggle-opening-hours'),
+      'text' : Drupal.t('Opening hours')
+    }).insertBefore('.js-opening-hours-toggle-element');
+
     // Set variables
     var element = $('.js-opening-hours-toggle');
+    var siteHeader = $('.site-header');
+    var scrollOffset = 0;
+    var scrollToTarget;
 
     // Attach click
     element.on('click touchstart', function(event) {
@@ -17,6 +27,26 @@
         // Toggle class
         $(element).toggleClass('js-collapsed js-expanded');
 
+        // Set scroll offset
+        if ($('.site-header.js-fixed').length) {
+          // If the site header is fixed use the height
+          scrollOffset = $(siteHeader).height();
+        }
+
+        // Scroll to the top of the element
+        if ($(element).parents('.js-library-opening-hours-target').length) {
+          // If there is a wrapper element with the target class
+          scrollToTarget = $(element).parents('.js-library-opening-hours-target');
+        } else {
+          // Else let's scroll to the element clicked
+          scrollToTarget = $(element);
+        }
+
+        $.scrollTo(scrollToTarget, 500, {
+          offset: -scrollOffset,
+          axis: 'y'
+        });
+
         // Remove focus from link
         $(element).blur();
       });
@@ -27,17 +57,13 @@
   }
 
   /**
-   * HACK: this function is used to include the gatewayf login link into the
-   *       header, so it's visible when the login tab is used. To do this any
-   *       other way would require at whole re-write of the themes header and
-   *       how it works.
+   * HACK: this is an hack that have to be fixed later.
    */
   function placement_of_wayf() {
     var wrapper = $('<section class="wayf-wrapper"></section>');
     $('.pane-ding-wayf-dk-create-user').appendTo(wrapper);
     $('.pane-wayf-dk-login').appendTo(wrapper);
-    $('.pane-ding-gatewayf-registration-registration').appendTo(wrapper);
-    $('.pane-ding-gatewayf-login').appendTo(wrapper);
+
     wrapper.appendTo($('.header-inner'));
   }
 
