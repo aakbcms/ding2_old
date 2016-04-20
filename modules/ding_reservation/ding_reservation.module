@@ -395,6 +395,19 @@ function ding_reservation_reserve_form_submit($form, &$form_state) {
         drupal_set_message(t('"@title" reserved.', array('@title' => $reservable->getTitle())));
       }
 
+      // Add user mail to reservation message, if defined.
+      if (empty($user->mail)) {
+        drupal_set_message(t('We will send you a letter (!url) when it is ready for pickup.', array(
+          '!url' => l(t('add e-mail', array(), array('context' => 'ding_reservation')), "/user/me/edit"),
+        ), array('context' => 'ding_reservation')));
+      }
+      else {
+        drupal_set_message(t('We will send an email to @mail (!url) when it is ready for pickup.', array(
+          '@mail' => $user->mail,
+          '!url' => l(t('update', array(), array('context' => 'ding_reservation')), "/user/me/edit"),
+        ), array('context' => 'ding_reservation')));
+      }
+
       if (is_array($reservation_result) and !empty($reservation_result['queue_number'])) {
         drupal_set_message(t('You are number @number in queue.', array('@number' => $reservation_result['queue_number'])));
       }
