@@ -242,7 +242,7 @@ function ding_library_default_page_manager_handlers() {
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'hide_if_empty' => 0,
+      'hide_if_empty' => 1,
       'tid' => '5130',
       'context' => 'argument_entity_id:node_1',
       'override_title' => 0,
