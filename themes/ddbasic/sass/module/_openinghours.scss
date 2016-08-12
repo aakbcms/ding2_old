@@ -18,10 +18,24 @@
 
   &.js-collapsed {
     @extend .icon-plus-sign;
+
+    @include small-medium() {
+      &:before {
+        content: "";
+        margin: 0;
+      }
+    }
   }
 
   &.js-expanded {
     @extend .icon-minus-sign;
+
+    @include small-medium() {
+      &:before {
+        content: "";
+        margin: 0;
+      }
+    }
   }
 
   &:hover {
