@@ -49,7 +49,8 @@ function fbs_availability_items($provider_ids) {
  *   Holdings info.
  */
 function fbs_availability_holdings($provider_ids) {
-  $holdings = fbs_service()->Catalog->getHoldings(fbs_service()->agencyId, $provider_ids, fbs_aakb_exclude_holdings_branches());  $result = array();
+  $holdings = fbs_service()->Catalog->getHoldings(fbs_service()->agencyId, $provider_ids, fbs_aakb_exclude_holdings_branches());
+  $result = array();
   $tmp_issues = array();
   foreach ($holdings as $item) {
     $result[$item->recordId] = array(

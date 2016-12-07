@@ -18,7 +18,7 @@ class ExternalCatalogApi extends SwaggerApi
      * @param array $recordid list of record ids
      * @return Availability[]
      */
-    public function getAvailability($agencyid, $recordid, $exclude)
+    public function getAvailability($agencyid, $recordid, $exclude = array())
     {
         $request = $this->newRequest("GET", "/external/v1/{agencyid}/catalog/availability");
         $request->addParameter("path", "agencyid", $agencyid);
@@ -78,7 +78,7 @@ class ExternalCatalogApi extends SwaggerApi
      * @param array $recordid Identifies the bibliographical records - The FAUST number.
      * @return HoldingsForBibliographicalRecord[]
      */
-    public function getHoldings($agencyid, $recordid, $exclude)
+    public function getHoldings($agencyid, $recordid, $exclude = array())
     {
         $request = $this->newRequest("GET", "/external/v1/{agencyid}/catalog/holdings");
         $request->addParameter("path", "agencyid", $agencyid);
