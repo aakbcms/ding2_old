@@ -18,11 +18,12 @@ class ExternalCatalogApi extends SwaggerApi
      * @param array $recordid list of record ids
      * @return Availability[]
      */
-    public function getAvailability($agencyid, $recordid)
+    public function getAvailability($agencyid, $recordid, $exclude)
     {
         $request = $this->newRequest("GET", "/external/v1/{agencyid}/catalog/availability");
         $request->addParameter("path", "agencyid", $agencyid);
         $request->addParameter("query", "recordid", $recordid);
+        $request->addParameter("query", "exclude", $exclude);
 
         $request->defineResponse(200, "", array('\\FBS\\Model\\Availability'));
         $request->defineResponse("400", 'bad request', null);
@@ -35,18 +36,18 @@ class ExternalCatalogApi extends SwaggerApi
      * Retrieves all booking information for each branch of an agency for bookings that ends after the current date.
      *
      *
-     *  
+     *
      *  Returns an array of BookingBranchInfo which contains:
-     *  
+     *
      *  - the branch ID
      *  - gross number of available materials for that branch
      *  - array of BookingInfo for the given bibliographic record, containing the booking Period and the number of
      *  preferred materials
-     *  
-     *  
-     *  
+     *
+     *
+     *
      *  This is to highlight when materials are available for a new potential booking.
-     *  
+     *
      *
      * @param string $agencyid ISIL of the agency (e.g. DK-761500)
      * @param string $recordid identifies the bibliographical record, i.e. the FAUST number
@@ -77,11 +78,12 @@ class ExternalCatalogApi extends SwaggerApi
      * @param array $recordid Identifies the bibliographical records - The FAUST number.
      * @return HoldingsForBibliographicalRecord[]
      */
-    public function getHoldings($agencyid, $recordid)
+    public function getHoldings($agencyid, $recordid, $exclude)
     {
         $request = $this->newRequest("GET", "/external/v1/{agencyid}/catalog/holdings");
         $request->addParameter("path", "agencyid", $agencyid);
         $request->addParameter("query", "recordid", $recordid);
+        $request->addParameter("query", "exclude", $exclude);
 
         $request->defineResponse(200, "", array('\\FBS\\Model\\HoldingsForBibliographicalRecord'));
         $request->defineResponse("400", 'bad request', null);

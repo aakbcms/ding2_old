@@ -19,10 +19,11 @@ class ExternalPlacementApi extends SwaggerApi
      * @param string $agencyid ISIL of the agency (e.g. DK-761500)
      * @return AgencyBranch[]
      */
-    public function getBranches($agencyid)
+    public function getBranches($agencyid, $exclude = array())
     {
         $request = $this->newRequest("GET", "/external/v1/{agencyid}/branches");
         $request->addParameter("path", "agencyid", $agencyid);
+        $request->addParameter("query", "exclude", $exclude);
 
         $request->defineResponse(200, "", array('\\FBS\\Model\\AgencyBranch'));
         $request->defineResponse("400", 'bad request', null);

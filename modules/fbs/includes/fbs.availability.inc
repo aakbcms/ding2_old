@@ -4,6 +4,23 @@
  * Handles availability information from the library system.
  */
 
+/***************************************
+ * HACK HACK HACK
+ *
+ * Array with branches to filter out.
+ **************************************/
+function fbs_aakb_exclude_holdings_branches() {
+  return array(
+    "FBS-751010",
+    "FBS-751024",
+    "FBS-751025",
+    "FBS-751027",
+    "FBS-751028",
+    "FBS-751030",
+    "FBS-751032",
+  );
+}
+
 /**
  * Implements provider availability, items.
  *
@@ -14,7 +31,7 @@
  *   Avaliability info.
  */
 function fbs_availability_items($provider_ids) {
-  $avails = fbs_service()->Catalog->getAvailability(fbs_service()->agencyId, $provider_ids);
+  $avails = fbs_service()->Catalog->getAvailability(fbs_service()->agencyId, $provider_ids, fbs_aakb_exclude_holdings_branches);
   $result = array();
   foreach ($avails as $item) {
     $result[$item->recordId] = array('available' => $item->available, 'reservable' => $item->reservable);
@@ -32,8 +49,7 @@ function fbs_availability_items($provider_ids) {
  *   Holdings info.
  */
 function fbs_availability_holdings($provider_ids) {
-  $holdings = fbs_service()->Catalog->getHoldings(fbs_service()->agencyId, $provider_ids);
-  $result = array();
+  $holdings = fbs_service()->Catalog->getHoldings(fbs_service()->agencyId, $provider_ids, fbs_aakb_exclude_holdings_branches());  $result = array();
   $tmp_issues = array();
   foreach ($holdings as $item) {
     $result[$item->recordId] = array(
