@@ -42,7 +42,7 @@ gulp.task('sass', 'Process SCSS using libsass',
     var includePaths = [
       'node_modules/compass-mixins/lib',
       // Zen grids is downloaded as a library using drush make.
-      '../../libraries/zen-grids/stylesheets'
+      'zen-grids/stylesheets'
     ];
 
     // Reference version of compiled files.
