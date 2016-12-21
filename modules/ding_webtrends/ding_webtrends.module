@@ -63,9 +63,9 @@ window.webtrendsAsyncInit=function(){
         onsitedoms:"$onsitedoms",
         fpcdom:".$domain",
         plugins:{
-            hm:{src:"//s.webtrends.com/js/webtrends.hm.js"},
-            facebook:{src:"//s.webtrends.com/js/webtrends.fb.js"},
-            yt:{src:"//s.webtrends.com/js/webtrends.yt.js"}
+            //hm:{src:"//s.webtrends.com/js/webtrends.hm.js"},
+            //facebook:{src:"//s.webtrends.com/js/webtrends.fb.js"},
+            //yt:{src:"//s.webtrends.com/js/webtrends.yt.js"}
         }
         }).track();
 };
