@@ -18,10 +18,24 @@
 
   &.js-collapsed {
     @extend .icon-plus-sign;
+
+    @include small-medium() {
+      &:before {
+        content: "";
+        margin: 0;
+      }
+    }
   }
 
   &.js-expanded {
     @extend .icon-minus-sign;
+
+    @include small-medium() {
+      &:before {
+        content: "";
+        margin: 0;
+      }
+    }
   }
 
   &:hover {
@@ -35,6 +49,7 @@
 
   /* Media queries */
   @include small-medium() {
+    padding-left: 26%;
     display: inline;
     width: auto;
   }

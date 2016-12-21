@@ -150,6 +150,13 @@ function ddbasic_preprocess_panels_pane(&$vars) {
     }
   }
 
+  // Opening hours link title.
+  if (isset($vars['content']['#theme']) && $vars['content']['#theme'] == 'opening_hours_week') {
+    $term = taxonomy_term_load($vars['content']['#tid']);
+    $title = t('Opening hours ' . $term->name);
+    $vars['link'] = '<a class="opening-hours-toggle js-opening-hours-toggle js-collapsed" href="#toggle-opening-hours">' . $title . '</a>';
+  }
+
   // Suggestions on panel pane.
   $vars['theme_hook_suggestions'][] = 'panels_pane__' . $vars['pane']->panel;
 
@@ -288,6 +295,30 @@ function ddbasic_preprocess_user_picture(&$variables) {
 
   // Inject the class we need into the IMG tag of user_picture.
   $variables['user_picture'] = str_replace('<img ', '<img class="pull-left" ', $variables['user_picture']);
+}
+
+/**
+ * Implements hook_node_view_alter().
+ *
+ * Add opening hours toggle to opening hours field if present.
+ */
+function ddbasic_node_view_alter(&$build) {
+  foreach (array_keys($build) as $field) {
+
+    if (preg_match('/^opening_hours_week_*(\d+)*/', $field, $matches)) {
+      $build[$field][0]['#prefix'] = '<a class="opening-hours-toggle js-opening-hours-toggle js-collapsed" href="#toggle-opening-hours">'.$build[$field]['#title'].'</a><div class="libraries-opening-hours js-opening-hours-toggle-element">';
+      $build[$field][0]['#suffix'] = '</div>';
+
+      // Hide label.
+      $build[$field]['#label_display'] = 'hidden';
+
+      if (!isset($build['opening_hours'])) {
+        $build['opening_hours'] = array();
+      }
+      $build['opening_hours'][] = $build[$field];
+      unset($build[$field]);
+    }
+  }
 }
 
 /**
