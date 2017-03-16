@@ -1974,10 +1974,10 @@ button.button {
       max-width: 100% !important; } }
 
 .ui-dialog-title {
-  color: #000003; }
+  color: #fffffd; }
 
 .ui-widget-content {
-  color: #000003;
+  color: #fffffd;
   padding: 0; }
 
 .ui-widget-header {
@@ -2002,7 +2002,7 @@ button.button {
     .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close .ui-icon {
       font-family: "SourceSansProSemibold";
       font-weight: normal;
-      color: #000003;
+      color: #fffffd;
       background: none;
       height: 24px;
       text-indent: 0;
@@ -2010,16 +2010,16 @@ button.button {
       .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close .ui-icon:hover {
         background: none;
         border: 0;
-        color: #000003; }
+        color: #fffffd; }
     .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close .ui-icon:before {
       font-family: "FontAwesome";
       margin-right: 2px;
       margin-bottom: -1px; }
     .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close:link, .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close:visited, .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close:active {
-      color: #000003;
+      color: #fffffd;
       text-decoration: none; }
     .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close:hover {
-      color: #000003;
+      color: #fffffd;
       text-decoration: none; }
   .ui-dialog .ui-dialog-titlebar .ui-dialog-title {
     float: none; }
