@@ -1974,10 +1974,10 @@ button.button {
       max-width: 100% !important; } }
 
 .ui-dialog-title {
-  color: #fffffd; }
+  color: #000003; }
 
 .ui-widget-content {
-  color: #fffffd;
+  color: #000003;
   padding: 0; }
 
 .ui-widget-header {
@@ -1991,6 +1991,14 @@ button.button {
   padding: 20px; }
   .ui-dialog:focus {
     outline: none; }
+  .ui-dialog .ding-list-message a {
+    color: #fffffa; }
+    .ui-dialog .ding-list-message a:link, .ui-dialog .ding-list-message a:visited, .ui-dialog .ding-list-message a:active {
+      color: #fffffa;
+      text-decoration: none; }
+    .ui-dialog .ding-list-message a:hover {
+      color: #fffffa;
+      text-decoration: underline; }
   .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close {
     float: right;
     right: 5px;
@@ -2002,7 +2010,7 @@ button.button {
     .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close .ui-icon {
       font-family: "SourceSansProSemibold";
       font-weight: normal;
-      color: #fffffd;
+      color: #000003;
       background: none;
       height: 24px;
       text-indent: 0;
@@ -2010,16 +2018,16 @@ button.button {
       .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close .ui-icon:hover {
         background: none;
         border: 0;
-        color: #fffffd; }
+        color: #000003; }
     .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close .ui-icon:before {
       font-family: "FontAwesome";
       margin-right: 2px;
       margin-bottom: -1px; }
     .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close:link, .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close:visited, .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close:active {
-      color: #fffffd;
+      color: #fffffa;
       text-decoration: none; }
     .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close:hover {
-      color: #fffffd;
+      color: #fffffa;
       text-decoration: none; }
   .ui-dialog .ui-dialog-titlebar .ui-dialog-title {
     float: none; }

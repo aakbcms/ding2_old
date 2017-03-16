@@ -42,7 +42,7 @@ $modal-border-radius:             12px;
 
 .ui-dialog-title {
   @extend .page-title;
-  
+
   color: $dialog-text;
 }
 
@@ -64,6 +64,22 @@ $modal-border-radius:             12px;
 
   &:focus {
     outline: none;
+  }
+
+  .ding-list-message a {
+    color: $topbar-text-color;
+
+    &:link,
+    &:visited,
+    &:active {
+      color: $topbar-text-color;
+      text-decoration: none;
+    }
+
+    &:hover {
+      color: $topbar-text-color;
+      text-decoration: underline;
+    }
   }
 
   .ui-dialog-titlebar {
@@ -102,12 +118,12 @@ $modal-border-radius:             12px;
       &:link,
       &:visited,
       &:active {
-        color: $dialog-text;
+        color: $topbar-text-color;
         text-decoration: none;
       }
 
       &:hover {
-        color: $dialog-text;
+        color: $topbar-text-color;
         text-decoration: none;
       }
     }
