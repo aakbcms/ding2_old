@@ -151,8 +151,13 @@ function ting_get_objects($ids) {
     if ($object === FALSE) {
       // So if the agency match lets search theme as that's faster then fetching
       // them one by one.
-      if (preg_match('/^(890790-basis|' . $agency . '-katalog|' . $agency . ')/', $id)) {
-        $query[] = 'rec.id=' . $id;
+      if (preg_match('/^(870970-basis|' . $agency . '-katalog|' . $agency . ')/', $id)) {
+        if ($agency && variable_get('ting_filter_by_local_holdings', 0)) {
+          $query[] = 'rec.id=' . $id . ' and holdingsitem.agencyid=' . $agency;
+        }
+        else {
+          $query[] = 'rec.id=' . $id;
+        }
       }
       else {
         // Get objects as it was not local.
