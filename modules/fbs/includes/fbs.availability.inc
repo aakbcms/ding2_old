@@ -4,6 +4,23 @@
  * Handles availability information from the library system.
  */
 
+/***************************************
+ * HACK HACK HACK
+ *
+ * Array with branches to filter out.
+ **************************************/
+function fbs_aakb_exclude_holdings_branches() {
+  return array(
+    "FBS-751010",
+    "FBS-751024",
+    "FBS-751025",
+    "FBS-751027",
+    "FBS-751028",
+    "FBS-751030",
+    "FBS-751032",
+  );
+}
+
 /**
  * Implements provider availability, items.
  *
@@ -17,7 +34,7 @@ function fbs_availability_items($provider_ids) {
   $avails = array();
 
   try {
-    $avails = fbs_service()->Catalog->getAvailability(fbs_service()->agencyId, $provider_ids);
+    $avails = fbs_service()->Catalog->getAvailability(fbs_service()->agencyId, $provider_ids, fbs_aakb_exclude_holdings_branches);
   }
   catch (Exception $e) {
     watchdog_exception('fbs', $e);
@@ -44,7 +61,7 @@ function fbs_availability_holdings($provider_ids) {
   $holdings = array();
 
   try {
-    $holdings = fbs_service()->Catalog->getHoldings(fbs_service()->agencyId, $provider_ids);
+    $holdings = fbs_service()->Catalog->getHoldings(fbs_service()->agencyId, $provider_ids, fbs_aakb_exclude_holdings_branches());
   }
   catch (Exception $e) {
     watchdog_exception('fbs', $e);

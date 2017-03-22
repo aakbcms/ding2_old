@@ -7,6 +7,27 @@
 
 include_once 'fbs.features.inc';
 
+/***************************************
+ * HACK HACK HACK
+ *
+ * Array with branches to filter out.
+ **************************************/
+function fbs_aakb_branch_exclude_filter() {
+  return array(
+    "FBS-751031",
+    "FBS-751009",
+    "FBS-751026",
+    "FBS-751029",
+    "FBS-751010",
+    "FBS-751024",
+    "FBS-751025",
+    "FBS-751027",
+    "FBS-751028",
+    "FBS-751030",
+    "FBS-751032",
+  );
+}
+
 // Load Field module hooks. Wrapping in function exists, so we'll still be
 // able to load this file in tests.
 if (function_exists('module_load_include')) {
@@ -381,16 +402,16 @@ function fbs_update_preferred_branch($account, $branch_id) {
 function fbs_branches() {
   $branches = &drupal_static(__FUNCTION__, NULL);
   if (is_null($branches)) {
-
     $res = array();
     try {
-      $res = fbs_service()->Placement->getBranches(fbs_service()->agencyId);
+      $res = fbs_service()->Placement->getBranches(fbs_service()->agencyId, fbs_aakb_branch_exclude_filter());
     }
     catch (Exception $e) {
       watchdog_exception('fbs', $e);
     }
 
     $branches = array();
+
     foreach ($res as $branch) {
       $branches[$branch->branchId] = $branch->title;
     }
