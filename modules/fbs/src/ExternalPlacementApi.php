@@ -17,9 +17,10 @@ class ExternalPlacementApi extends SwaggerApi
      *  reservations.
      *
      * @param string $agencyid ISIL of the agency (e.g. DK-761500)
+     * @param array $exclude Identifies the branchIds which are excluded from the result
      * @return AgencyBranch[]
      */
-    public function getBranches($agencyid, $exclude = array())
+    public function getBranches($agencyid, $exclude = null)
     {
         $request = $this->newRequest("GET", "/external/v1/{agencyid}/branches");
         $request->addParameter("path", "agencyid", $agencyid);

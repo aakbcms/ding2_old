@@ -31,11 +31,20 @@ function fbs_aakb_exclude_holdings_branches() {
  *   Avaliability info.
  */
 function fbs_availability_items($provider_ids) {
-  $avails = fbs_service()->Catalog->getAvailability(fbs_service()->agencyId, $provider_ids, fbs_aakb_exclude_holdings_branches);
+  $avails = array();
+
+  try {
+    $avails = fbs_service()->Catalog->getAvailability(fbs_service()->agencyId, $provider_ids, fbs_aakb_exclude_holdings_branches);
+  }
+  catch (Exception $e) {
+    watchdog_exception('fbs', $e);
+  }
+
   $result = array();
   foreach ($avails as $item) {
     $result[$item->recordId] = array('available' => $item->available, 'reservable' => $item->reservable);
   }
+
   return $result;
 }
 
@@ -49,7 +58,15 @@ function fbs_availability_items($provider_ids) {
  *   Holdings info.
  */
 function fbs_availability_holdings($provider_ids) {
-  $holdings = fbs_service()->Catalog->getHoldings(fbs_service()->agencyId, $provider_ids, fbs_aakb_exclude_holdings_branches());
+  $holdings = array();
+
+  try {
+    $holdings = fbs_service()->Catalog->getHoldings(fbs_service()->agencyId, $provider_ids, fbs_aakb_exclude_holdings_branches());
+  }
+  catch (Exception $e) {
+    watchdog_exception('fbs', $e);
+  }
+
   $result = array();
   $tmp_issues = array();
   foreach ($holdings as $item) {
@@ -61,11 +78,9 @@ function fbs_availability_holdings($provider_ids) {
       'total_count' => 0,
       // We don't know about this one.
       'is_internet' => FALSE,
-      // And FBS can't tell us this.
-      'reserved_count' => 0,
+      'reserved_count' => $item->reservations,
       'is_periodical' => FALSE,
     );
-
 
     $placement_parts = array('branch', 'department', 'location', 'sublocation');
     foreach ($item->holdings as $item_holding) {
