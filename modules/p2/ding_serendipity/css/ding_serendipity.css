@@ -6,10 +6,8 @@
 
 .pane-serendipity-ting-object {
   background-color: #ffffff;
-  padding-top: 20px;
-  padding-right: 20px;
+  padding-top: 10px;
   padding-bottom: 10px;
-  padding-left: 20px;
   margin-bottom: 20px;
 }
 .pane-serendipity-ting-object .pane-title {
@@ -20,6 +18,7 @@
   color: rgba(0,0,0,0.7);
   font-size: 160%;
   margin-bottom: 20px;
+  padding-left: 20px;
 }
 .pane-serendipity-ting-object .ting-object {
   margin-bottom: 20px;
