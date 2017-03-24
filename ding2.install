@@ -447,3 +447,17 @@ function ding2_update_7031() {
 function ding2_update_7032() {
   module_enable(array('ding_campaign'));
 }
+
+/**
+ * Remove old uninstall modules.
+ */
+function ding2_update_7033(&$sandbox) {
+  $modules = array(
+    'cookiecontrol',
+    'vejlebib_fbs',
+  );
+  db_delete('system')
+    ->condition('name', $modules, 'IN')
+    ->condition('type', 'module')
+    ->execute();
+ }
