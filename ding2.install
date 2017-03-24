@@ -451,7 +451,7 @@ function ding2_update_7032() {
 /**
  * Remove old uninstall modules.
  */
-function ding2_update_7033(&$sandbox) {
+function ding2_update_7034(&$sandbox) {
   $modules = array(
     'cookiecontrol',
     'vejlebib_fbs',
