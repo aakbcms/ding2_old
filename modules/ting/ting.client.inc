@@ -149,15 +149,8 @@ function ting_get_objects($ids) {
   $query = array();
   foreach ($objects as $id => $object) {
     if ($object === FALSE) {
-      // So if the agency match lets search theme as that's faster then fetching
-      // them one by one.
-      if (preg_match('/^(890790-basis|' . $agency . '-katalog|' . $agency . ')/', $id)) {
-        $query[] = 'rec.id=' . $id;
-      }
-      else {
-        // Get objects as it was not local.
-        $objects[$id] = ting_get_object($id);
-      }
+      // Get objects as it was not local.
+      $objects[$id] = ting_get_object($id);
     }
   }
   // Open search is limited to 50 results per call, so iterate until all results
@@ -173,7 +166,13 @@ function ting_get_objects($ids) {
     if (!empty($profile) && method_exists($request, 'setProfile')) {
       $request->setProfile($profile);
     }
-    $request->setQuery(implode(' OR ', $query_chunk));
+
+    if ($agency && variable_get('ting_filter_by_local_holdings', FALSE)) {
+      $request->setQuery(implode(' OR ', $query_chunk) . ' and holdingsitem.agencyid=' . $agency);
+    }
+    else {
+      $request->setQuery(implode(' OR ', $query_chunk));
+    }
     $request->setStart(1);
     $request->setNumResults(50);
     $request->setAllObjects(TRUE);
