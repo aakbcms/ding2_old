@@ -89,13 +89,24 @@ function ding_entity_rating_add_to_list_callback($entity, $rating) {
     $commands[] = ajax_command_ding_popup('ding_reservation', t('Error'), '<p>' . t('Only provider users can rate materials.') . '</p>');
   }
   else {
-    ding_entity_rating_add_to_list($entity, $user, $rating);
+    if ($rating > 0) {
+      ding_entity_rating_add_to_list($entity, $user, $rating);
 
-    $message = array(
-      '#theme' => 'ding_entity_rating_thank_you',
-      '#prefix' => '<p>',
-      '#suffix' => '</p>',
-    );
+      $message = array(
+        '#theme' => 'ding_entity_rating_thank_you',
+        '#prefix' => '<p>',
+        '#suffix' => '</p>',
+      );
+    }
+    else {
+      ding_entity_rating_remove_from_list($entity, $user);
+      $message = array(
+        '#theme' => 'ding_entity_rating_thank_you',
+        '#response' => t('Rating cleared'),
+        '#prefix' => '<p>',
+        '#suffix' => '</p>',
+      );
+    }
 
     $commands[] = ajax_command_ding_popup(
       'ding_reservation',
@@ -243,7 +254,9 @@ function ding_entity_rating_theme($existing, $type, $theme, $path) {
       'variables' => array('rating' => NULL),
     ),
     'ding_entity_rating_thank_you' => array(
-      'variables' => array(),
+      'variables' => array(
+        'response' => t('Thank you for your input'),
+      ),
     ),
     'ding_entity_rating_promote_ratings' => array(
       'variables' => array('history_list' => NULL, 'account' => NULL),
@@ -256,7 +269,7 @@ function ding_entity_rating_theme($existing, $type, $theme, $path) {
  * Theme function for theme_ding_entity_rating_thank_you.
  */
 function theme_ding_entity_rating_thank_you($variables) {
-  return '<div class="ding-entity-rating-respons">' . t('Thank you for your input') . '</div>';
+  return '<div class="ding-entity-rating-respons">' . $variables['response'] . '</div>';
 }
 
 /**
@@ -291,11 +304,7 @@ function theme_ding_entity_rating_display($variables) {
   $output = '<div class="' . implode(' ', $variables['classes_array']) . '" data-ding-entity-rating-id="' . $variables['entity']->ding_entity_id . '" data-ding-entity-rating-path="' . $variables['path'] . '">';
 
   $output .= ding_entity_rating_build_theme_list($variables['rating']);
-
-  // Add average value if the entity has ratings already.
-  if (!empty($variables['avg'])) {
-    $output .= '<span class="ding-entity-rating-avg">' . t('Average:') . ' ' . round($variables['avg'], 2) . '</span>';
-  }
+  $output .= '<a href="#" class="ding-entity-rating-clear" data-ding-entity-rating-value="0">' . t('Clear') . '</a>';
 
   return $output . '</div>';
 }
@@ -339,20 +348,60 @@ function ding_entity_rating_build_theme_list($rating) {
  * Retrieve the average rating of a ting object entity.
  *
  * @param object $entity
- *   The ting object entity to remove from the rating list.
+ *   The ting object entity to get rating for.
  *
  * @return int
  *   The average rating of the given entity.
  */
 function ding_entity_rating_get_average($entity) {
-  $query = db_select('field_data_field_weight', 'w');
-  $query->join('eck_ding_type', 'dt', 'w.entity_id = dt.id');
-  $query->join('field_data_field_value', 'v', 'w.entity_id = v.entity_id');
-  $query->condition('v.field_value_value', $entity->ding_entity_id)
-    ->addExpression('AVG(w.field_weight_value)', 'avg_count');
-  $result = $query->execute();
+  return ding_entity_rating_average($entity);
+}
 
-  return $result->fetchField(0);
+/**
+ * Set the average rating of a ting object entity.
+ *
+ * @param object $entity
+ *   The ting object entity to set rating for.
+ * @param mixed $value
+ *   The average value.
+ *
+ * @return int
+ *   The average rating of the given entity.
+ */
+function ding_entity_rating_set_average($entity, $value) {
+  return ding_entity_rating_average($entity, $value);
+}
+
+/**
+ * Get / Set average rating of a ting object.
+ *
+ * @param object $entity
+ *   The ting object entity to work with.
+ * @param mixed $value
+ *   Set the average if this value is set.
+ *
+ * @return int
+ *   The average rating of the given entity.
+ */
+function ding_entity_rating_average($entity, $value = NULL) {
+  $averages = &drupal_static(__FUNCTION__, array());
+  $id = $entity->ding_entity_id;
+
+  if ($value !== NULL) {
+    $averages[$id] = $value;
+  }
+  elseif (!isset($averages[$id])) {
+    $query = db_select('field_data_field_weight', 'w');
+    $query->join('eck_ding_type', 'dt', 'w.entity_id = dt.id');
+    $query->join('field_data_field_value', 'v', 'w.entity_id = v.entity_id');
+    $query->condition('v.field_value_value', $id)
+      ->addExpression('AVG(w.field_weight_value)', 'avg_count');
+    $result = $query->execute();
+
+    $averages[$id] = $result->fetchField(0);
+  }
+
+  return $averages[$id];
 }
 
 /**
