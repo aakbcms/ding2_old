@@ -304,8 +304,7 @@ function ddbasic_preprocess_node(&$variables, $hook) {
 
     // Add event location variables.
     if (!empty($variables['content']['field_ding_event_location'][0]['#address']['name_line'])) {
-      $location = $variables['content']['field_ding_event_location'][0]['#address'];
-      $variables['ddbasic_event_location'] = $location['name_line'] . '<br/>' . $location['thoroughfare'] . ', ' . $location['postal_code'] . ', ' . $location['locality'];
+      $variables['ddbasic_event_location'] = $variables['content']['field_ding_event_location'][0]['#address']['name_line'] . '<br/>' . $variables['content']['field_ding_event_location'][0]['#address']['thoroughfare'] . ', ' . $variables['content']['field_ding_event_location'][0]['#address']['locality'];
     }
     else {
       // User OG group ref to link back to library.
@@ -344,10 +343,6 @@ function ddbasic_preprocess_node(&$variables, $hook) {
     // field preprocess.
     if (empty($variables['content']['field_ding_event_price']['#items'][0]['value'])) {
       $variables['content']['field_ding_event_price'][0]['#markup'] = t('Free');
-    }
-    else {
-      $currency = variable_get('ding_event_currency_type', 'Kr');
-      $variables['content']['field_ding_event_price'][0]['#markup'] .= " {$currency}";
     }
   }
 
@@ -948,7 +943,7 @@ function ddbasic_process_page(&$vars) {
  *
  * Adds wrapper classes to the different groups on the ting object.
  */
-function ddbasic_preprocess_ting_object(&$vars) {
+function ddbasic_process_ting_object(&$vars) {
   if (isset($vars['elements']['#view_mode']) && $vars['elements']['#view_mode'] == 'full') {
     switch ($vars['elements']['#entity_type']) {
       case 'ting_object':
@@ -1032,9 +1027,18 @@ function ddbasic_preprocess_ting_object(&$vars) {
           unset($content['ting_relations']);
         }
 
-        // Move the reset over if any have been defined in the UI.
+        // Move the rest over if any have been defined in the UI.
         if (!empty($content)) {
-          $vars['content'] += $content;
+          // Move the remaining content one level down in the array structure.
+          // The reason for this is that drupal_render passes it to
+          // element_children, which will sort the array by #weight if any
+          // element has the key, or keep the array order if they doesn't. This
+          // will seriously mess up the display, as the groups above doesn't
+          // have a weight and can sink to the bottom, depending on the #weights
+          // defined.
+          $vars['content'] += array(
+            'content' => $content,
+          );
         }
         break;
 
