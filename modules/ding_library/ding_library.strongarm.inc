@@ -98,25 +98,55 @@ function ding_library_strongarm() {
       ),
       'display' => array(
         'opening_hours_week' => array(
-          'teaser' => array(
-            'weight' => '2',
-            'visible' => FALSE,
-          ),
           'default' => array(
-            'weight' => '0',
             'visible' => FALSE,
+            'weight' => 0,
+            'label' => 'above',
           ),
-        ),
-        'opening_hours_week_5131' => array(
-          'teaser' => array(
-            'weight' => '0',
-            'visible' => TRUE,
+          'full' => array(
+            'visible' => FALSE,
+            'weight' => 0,
+            'label' => 'above',
           ),
-        ),
-        'opening_hours_week_5130' => array(
           'teaser' => array(
-            'weight' => '0',
-            'visible' => TRUE,
+            'visible' => FALSE,
+            'weight' => 0,
+            'label' => 'above',
+          ),
+          'rss' => array(
+            'visible' => FALSE,
+            'weight' => 0,
+            'label' => 'above',
+          ),
+          'search_index' => array(
+            'visible' => FALSE,
+            'weight' => 0,
+            'label' => 'above',
+          ),
+          'search_result' => array(
+            'visible' => FALSE,
+            'weight' => 0,
+            'label' => 'above',
+          ),
+          'alternative_layout_full' => array(
+            'visible' => FALSE,
+            'weight' => 0,
+            'label' => 'above',
+          ),
+          'teaser_highlight' => array(
+            'visible' => FALSE,
+            'weight' => 0,
+            'label' => 'above',
+          ),
+          'token' => array(
+            'visible' => FALSE,
+            'weight' => 0,
+            'label' => 'above',
+          ),
+          'workflow_tab' => array(
+            'visible' => FALSE,
+            'weight' => 0,
+            'label' => 'above',
           ),
         ),
       ),
