@@ -91,7 +91,7 @@
 <article class="news" style="display: inline-block;">
   <header class="page-header">
 		<h1 class="page-title"><?php print $title; ?></h1>
-    <div class="image-container" style="float: left;">
+    <div class="image-container" style="float: left;padding: 0 10px 10px 0;">
       <?php print render($content['field_ding_news_list_image']); ?>
     </div>
   </header>
