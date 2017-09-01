@@ -64,6 +64,8 @@ function ding_place2book_schema() {
       ),
       'primary key' => array('nid'),
     ),
+    // Defines cache table to hold basic information from place2book.
+    $schema['cache_place2book'] = drupal_get_schema_unprocessed('system', 'cache'),
   );
 }
 
@@ -106,4 +108,11 @@ function ding_place2book_update_7001() {
   $num_upd = db_update('ding_place2book')
     ->fields(array('ticket_type' => 'Adgang'))
     ->execute();
+}
+
+/**
+ * Add cache table to place2book.
+ */
+function ding_place2book_update_7002() {
+  return db_create_table('cache_place2book', drupal_get_schema_unprocessed('system', 'cache'));
 }

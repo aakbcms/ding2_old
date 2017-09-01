@@ -1031,6 +1031,9 @@ function ding_place2book_render_place2book_ticketsinfo($node) {
               );
       $p2b_result = drupal_http_request($service_settings['service_url'] . '/available_tickets', $options);
 
+      // Cache place2book url for use by other modules.
+      cache_set($place2book_id . '_' . $library_id, $p2b_result->headers['location'], 'cache_place2book', CACHE_PERMANENT);
+
       //we must have a sales-status header
       if ($p2b_result->headers['sales-status']) {
 
@@ -1076,6 +1079,13 @@ function ding_place2book_render_place2book_ticketsinfo($node) {
     'url' => $url,
     'type' => $type,
   ));
+}
+
+/**
+ * Implements hook_flush_caches().
+ */
+function ding_place2book_flush_caches() {
+  return array('cache_place2book');
 }
 
 /**
