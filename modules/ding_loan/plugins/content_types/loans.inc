@@ -127,6 +127,11 @@ function ding_loan_loans_form($form, &$form_state, $account, $loans = array()) {
       $form['loans'][$gid]['title']['#prefix'] = '<a class="anchor" id="anchor-' . $group_type . '"></a>' . $form['loans'][$gid]['title']['#prefix'];
     }
 
+    $renewable = TRUE;
+    if (isset($group['renewable']) && !$group['renewable'] ) {
+      $renewable = FALSE;
+    }
+
     foreach ($group['loans'] as $loan) {
       // The default title from loan object.
       $title = $loan->display_name;
@@ -188,7 +193,7 @@ function ding_loan_loans_form($form, &$form_state, $account, $loans = array()) {
             '#weight' => 4,
           ),
         ),
-        '#disabled' => !$loan->renewable,
+        '#disabled' => !$loan->renewable || !$renewable,
       );
 
       // Add material number.
@@ -356,6 +361,7 @@ function ding_loan_loans_form_renew_submit($form, &$form_state) {
 function _ding_loan_loans_group_loans_by_date($loans) {
   $groups = array();
   $today = date('Y-m-d', REQUEST_TIME);
+  $renew_date = date('Y-m-d', strtotime($today . ' +8 days'));
 
   foreach ($loans as $loan) {
     if ($loan->expiry < $today) {
@@ -378,6 +384,21 @@ function _ding_loan_loans_group_loans_by_date($loans) {
       }
       $groups['due']['loans'][$loan->id] = $loan;
     }
+    elseif ($loan->expiry < $renew_date) {
+      // Loans that are to be handed in in x days.
+      if (!isset($groups[$loan->expiry])) {
+        $time = strtotime($loan->expiry);
+        $due_in = t('Due in @count, @date can be renewed', array(
+          '@count' => format_interval($time - time(), 1),
+          '@date' => date('d/m/y', $time),
+        ));
+        $groups[$loan->expiry] = array(
+          'title' => $due_in,
+          'loans' => array(),
+        );
+      }
+      $groups[$loan->expiry]['loans'][$loan->id] = $loan;
+    }
     else {
       // Loans that are to be handed in in x days.
       if (!isset($groups[$loan->expiry])) {
@@ -389,6 +410,7 @@ function _ding_loan_loans_group_loans_by_date($loans) {
         $groups[$loan->expiry] = array(
           'title' => $due_in,
           'loans' => array(),
+          'renewable' => FALSE,
         );
       }
       $groups[$loan->expiry]['loans'][$loan->id] = $loan;
