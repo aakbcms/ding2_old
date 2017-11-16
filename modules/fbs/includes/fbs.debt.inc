@@ -20,75 +20,61 @@ function fbs_debt_list($account, $reset = FALSE) {
   $results = &drupal_static(__FUNCTION__, array());
 
   if (empty($results) || $reset) {
-    // Check if ding_session_cache is available.
-    if (module_exists('ding_session_cache') && !$reset) {
-      $results = ding_session_cache_get('fbs', 'debt');
+    $res = array();
+
+    try {
+      $res = fbs_service()->Payment->getFees(fbs_service()->agencyId, fbs_patron_id($account), FALSE, FALSE);
+    } catch (Exception $e) {
+      watchdog_exception('fbs', $e);
     }
 
-    // If both static cache and session cache failed, try reloading information
-    // from FBS.
-    if (empty($results) || $reset) {
-      $res = array();
-
-      try {
-        $res = fbs_service()->Payment->getFees(fbs_service()->agencyId, fbs_patron_id($account), FALSE, FALSE);
-      } catch (Exception $e) {
-        watchdog_exception('fbs', $e);
+    $ids = array();
+    foreach ($res as $fee) {
+      // The entity is only fetched in this case.
+      if (!empty($fee->materials) && count($fee->materials) == 1) {
+        $material = reset($fee->materials);
+        $ids[$material->recordId] = $material->recordId;
       }
+    }
+    $ids = ding_provider_build_entity_id($ids);
 
-      $ids = array();
-      foreach ($res as $fee) {
-        // The entity is only fetched in this case.
-        if (!empty($fee->materials) && count($fee->materials) == 1) {
-          $material = reset($fee->materials);
-          $ids[$material->recordId] = $material->recordId;
-        }
-      }
-      $ids = ding_provider_build_entity_id($ids);
+    foreach ($res as $fee) {
+      $id = $fee->feeId;
 
-      foreach ($res as $fee) {
-        $id = $fee->feeId;
+      $data = array(
+        'date' => $fee->creationDate,
+        'display_name' => $fee->reasonMessage,
+        // FBS only provides the amount left to be paid on each fee, so this
+        // will only reflect that.
+        'amount' => $fee->amount,
+        // And the only thing we can do here is set it to zero, as the original
+        // amount isn't available.
+        'amount_paid' => 0,
+        'invoice_number' => NULL,
+        'type' => $fee->reasonMessage,
+      );
 
-        $data = array(
-          'date' => $fee->creationDate,
-          'display_name' => $fee->reasonMessage,
-          // FBS only provides the amount left to be paid on each fee, so this
-          // will only reflect that.
-          'amount' => $fee->amount,
-          // And the only thing we can do here is set it to zero, as the original
-          // amount isn't available.
-          'amount_paid' => 0,
-          'invoice_number' => NULL,
-          'type' => $fee->reasonMessage,
-        );
-
-        if (!empty($fee->materials)) {
-          $record_ids = array();
-          $material_ids = array();
-          foreach ($fee->materials as $material) {
-            $material_ids[] = $material->materialItemNumber;
-            $record_ids[] = $material->recordId;
-          }
-
-          // If there's only one material, use its title as display_name;
-          if (count($record_ids) == 1) {
-            $record_id = reset($record_ids);
-            $entity = ding_entity_load($ids[$record_id]);
-            $data['display_name'] = $entity->getTitle();
-          }
-          elseif (count($record_ids) > 1) {
-            $data['display_name'] = t('Multiple materials');
-          }
-          $data['material_number'] = implode(', ', $material_ids);
+      if (!empty($fee->materials)) {
+        $record_ids = array();
+        $material_ids = array();
+        foreach ($fee->materials as $material) {
+          $material_ids[] = $material->materialItemNumber;
+          $record_ids[] = $material->recordId;
         }
 
-        $results[$id] = new DingProviderDebt($id, $data);
+        // If there's only one material, use its title as display_name;
+        if (count($record_ids) == 1) {
+          $record_id = reset($record_ids);
+          $entity = ding_entity_load($ids[$record_id]);
+          $data['display_name'] = $entity->getTitle();
+        }
+        elseif (count($record_ids) > 1) {
+          $data['display_name'] = t('Multiple materials');
+        }
+        $data['material_number'] = implode(', ', $material_ids);
       }
 
-      // Store the debt into ding session cache.
-      if (module_exists('ding_session_cache')) {
-        ding_session_cache_set('fbs', 'debt', $results);
-      }
+      $results[$id] = new DingProviderDebt($id, $data);
     }
   }
 
@@ -135,11 +121,6 @@ function fbs_debt_payment_received($account, $debt_ids = array(), $order_id = NU
       watchdog('fbs', 'Could not register payment for patron @patron_id, order id @order_id, fee id @fee_id', $variables, WATCHDOG_ERROR);
       return FALSE;
     }
-  }
-
-  // Clear ding session cache.
-  if (module_exists('ding_session_cache')) {
-    ding_session_cache_clear('fbs', 'debt');
   }
 
   return TRUE;
