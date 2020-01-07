@@ -155,7 +155,10 @@ function ting_reference_field_insert($entity_type, $entity, $field, $instance, $
       ting_reference_create_relation($entity_type, $entity_id, $item['tid']);
     }
   }
-  // Need to clear field cache to display fields properly.
+  // Need to clear cache to display fields properly.
+  if (module_exists('entitycache')) {
+    cache_clear_all($entity_id, 'cache_entity_' . $entity_info['base table']);
+  }
   field_cache_clear();
 }
 
@@ -208,7 +211,11 @@ function _ting_reference_field_update($entity_type, $entity, &$items) {
     }
   }
 
-  // Clear cache.
+  // Need to clear cache to display fields properly.
+  if (module_exists('entitycache')) {
+    $entity_info = entity_get_info($entity_type);
+    cache_clear_all($entity_id, 'cache_entity_' . $entity_info['base table']);
+  }
   field_cache_clear();
 
 }
@@ -234,6 +241,13 @@ function _ting_reference_field_update_cron($entity_type, $entity, &$items) {
 
   // Clear cache if needed.
   if ($clear_cache) {
+    // Need to clear cache to display fields properly.
+    if (module_exists('entitycache')) {
+      $entity_ids = entity_extract_ids($entity_type, $entity);
+      $entity_id = array_shift($entity_ids);
+      $entity_info = entity_get_info($entity_type);
+      cache_clear_all($entity_id, 'cache_entity_' . $entity_info['base table']);
+    }
     field_cache_clear();
   }
 
